@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.myfamilyapp.dto.AccountDTO;
 import br.com.myfamilyapp.entities.Account;
 import br.com.myfamilyapp.repositories.AccountRepository;
 
@@ -32,6 +33,11 @@ public class AccountService {
 	
 	public void remove(Long id) { 
 		repo.deleteById(id);
+	}
+	
+	
+	public Account fromDTO(AccountDTO dto) { 
+		return new Account(dto.getFamilyName(), dto.getEmail(), dto.getPassword(), dto.getState(), dto.getCity());
 	}
 	
 	

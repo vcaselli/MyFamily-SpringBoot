@@ -2,14 +2,26 @@ package br.com.myfamilyapp.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import br.com.myfamilyapp.services.validations.AccountInsert;
+
+@AccountInsert
 public class AccountDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id; 
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String familyName;
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Email
 	private String email; 
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String password; 
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String state; 
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String city;
 	
 	
