@@ -103,6 +103,12 @@ public class Account implements Serializable{
 	public void addProfileType(ProfileType pt) { 
 		profileType.add(pt.getCod());
 	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", familyName=" + familyName + ", email=" + email + ", password=" + password
+				+ ", state=" + state + ", city=" + city + ", profileType=" + profileType + "]";
+	}
 	
 	
 }

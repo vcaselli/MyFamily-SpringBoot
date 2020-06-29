@@ -43,9 +43,10 @@ public class AccountService {
 	
 	public void updateData(Account account, Account neo) { 
 		account.setFamilyName(neo.getFamilyName());
-		account.setEmail(account.getEmail());
+		account.setEmail(neo.getEmail());
 		account.setState(neo.getState());
 		account.setCity(neo.getCity());
+		
 	}
 	
 	public Account update(Long id, Account neo) { 

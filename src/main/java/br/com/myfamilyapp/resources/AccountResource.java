@@ -61,8 +61,9 @@ public class AccountResource {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Account> update(@PathVariable Long id, @RequestBody Account neo){ 
-		Account account = service.update(id, neo);
+	public ResponseEntity<Account> update(@PathVariable Long id, @RequestBody AccountDTO objDto){ 
+		Account account = service.fromDTO(objDto);
+		account = service.update(id, account);
 		return ResponseEntity.ok().body(account);
 	}
 
