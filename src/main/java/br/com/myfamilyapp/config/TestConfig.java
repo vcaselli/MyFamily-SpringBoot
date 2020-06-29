@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.myfamilyapp.entities.Account;
+import br.com.myfamilyapp.entities.enums.ProfileType;
 import br.com.myfamilyapp.repositories.AccountRepository;
 
 @Configuration
@@ -17,7 +18,7 @@ public class TestConfig implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		Account account = new Account("Caselli", "victordcporto@gmail.com", "123", "RJ", "Rio de Janeiro");
-		
+		account.addProfileType(ProfileType.ADMIN);
 		accountRepository.save(account);
 		
 		

@@ -1,11 +1,19 @@
 package br.com.myfamilyapp.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import br.com.myfamilyapp.entities.enums.ProfileType;
 
 @Entity
 public class Account implements Serializable{
@@ -14,11 +22,15 @@ public class Account implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
-	private String familyName; 
+	private String familyName;
 	private String email; 
 	private String password; 
 	private String state; 
 	private String city;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="ProfileType")
+	private Set<Integer> profileType = new HashSet<>();
 	
 	public Account() { 
 		
@@ -31,6 +43,7 @@ public class Account implements Serializable{
 		this.password = password;
 		this.state = state;
 		this.city = city;
+		addProfileType(ProfileType.CLIENT);
 	}
 
 	public Long getId() {
@@ -81,6 +94,13 @@ public class Account implements Serializable{
 		this.city = city;
 	}
 
+	public Set<ProfileType> getProfileType() {
+		return profileType.stream().map(x -> ProfileType.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addProfileType(ProfileType pt) { 
+		profileType.add(pt.getCod());
+	}
 	
 	
 }
