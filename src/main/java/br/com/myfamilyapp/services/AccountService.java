@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.myfamilyapp.dto.AccountDTO;
@@ -15,6 +16,9 @@ public class AccountService {
 	
 	@Autowired
 	AccountRepository repo; 
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	
 	public List<Account> findAll(){ 
@@ -37,7 +41,7 @@ public class AccountService {
 	
 	
 	public Account fromDTO(AccountDTO dto) { 
-		return new Account(dto.getFamilyName(), dto.getEmail(), dto.getPassword(), dto.getState(), dto.getCity());
+		return new Account(dto.getFamilyName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getState(), dto.getCity());
 	}
 	
 	
