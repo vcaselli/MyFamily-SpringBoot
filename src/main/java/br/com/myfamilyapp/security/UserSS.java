@@ -80,5 +80,9 @@ public class UserSS implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	public boolean hasRole(ProfileType profileType) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(profileType.getDescription()));
+	}
 
 }
