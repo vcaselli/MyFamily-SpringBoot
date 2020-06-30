@@ -28,9 +28,20 @@ public class AccountService {
 		return repo.findAll();
 	}
 
-	public Account findById(Long id) {
-		Optional<Account> object = repo.findById(id);
-		return object.get();
+	//public Account findById(Long id) {
+	//	Optional<Account> object = repo.findById(id);
+	//	return object.get();
+//	}
+	
+	public Account findById(Long id) { 
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(ProfileType.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Optional<Account> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Account.class.getName()));
 	}
 
 	public Account findByEmail(String email) {
