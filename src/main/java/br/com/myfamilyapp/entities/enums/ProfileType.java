@@ -2,7 +2,9 @@ package br.com.myfamilyapp.entities.enums;
 
 public enum ProfileType {
 	ADMIN(1, "ROLE_ADMIN"),
-	CLIENT(2, "ROLE_CLIENT");
+	CLIENT(2, "ROLE_CLIENT"),
+	CONTROLLER(3, "ROLE_CONTROLLER"),
+	GAMER(4, "ROLE_GMAER");
 	
 	private Integer cod; 
 	private String description;

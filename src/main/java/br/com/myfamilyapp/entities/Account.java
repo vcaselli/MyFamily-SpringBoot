@@ -1,10 +1,13 @@
 package br.com.myfamilyapp.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -13,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import br.com.myfamilyapp.entities.enums.ProfileType;
 
@@ -33,6 +37,8 @@ public class Account implements Serializable{
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name="ProfileType")
 	private Set<Integer> profileType = new HashSet<>();
+	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+	private List<Profiles> profiles = new ArrayList<>();
 	
 	public Account() { 
 		
@@ -102,6 +108,14 @@ public class Account implements Serializable{
 
 	public void addProfileType(ProfileType pt) { 
 		profileType.add(pt.getCod());
+	}
+	
+	public List<Profiles> getProfiles() {
+		return profiles;
+	}
+
+	public void setProfiles(List<Profiles> profiles) {
+		this.profiles = profiles;
 	}
 
 	@Override
